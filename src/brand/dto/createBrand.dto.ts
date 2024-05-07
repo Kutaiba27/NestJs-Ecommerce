@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { IsOptional, IsString, Length } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class CreateBrand {
 
-   @Length(2,35,{message: "length must be between 2 and 35 characters"})
-   @IsString({message: "brnad name must be a string"})
+   @Length(2, 30, { message: "The name must be between 2 and 30 characters long" })
+   @IsString({ message: "The name must be a string" })
    name: string ;
-   @IsOptional()
+   @IsString({message: "brnad slug must be a string"})
    slug: string ;
-   // @IsString({message: "brnad image must be a string"})
+   @IsString({message: "brnad image must be a string"})
    image: string ;
 }

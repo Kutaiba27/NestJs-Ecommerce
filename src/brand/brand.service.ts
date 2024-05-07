@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectRepository, } from '@nestjs/typeorm';
 import { BrandEntity } from 'src/database/entitys/brand.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateBrand } from './dto/createBrand.dto';
+import { UpdateBrand } from './dto/updateBrand.dto';
 
 @Injectable()
 export class BrandService {
@@ -12,11 +13,23 @@ export class BrandService {
    ){}
    
    async addBrand(brnad: CreateBrand): Promise<BrandEntity>{
-      const addBrand = await this.BrandRepository.save(brnad);
-      return addBrand
+         const addBrand = await this.BrandRepository.save(brnad);
+         return addBrand
    }
 
    async getAllBrand(){
       return this.BrandRepository.find();
+   }
+
+   async getBrand(id: number): Promise<BrandEntity>{
+      return this.BrandRepository.findOne({ where: { id: id } });
+   }
+
+   async updateBrand(brnad: UpdateBrand, id: number): Promise<UpdateResult>{
+      return this.BrandRepository.update({id: id}, brnad);
+   }
+
+   async deleteBrand(id: number): Promise<DeleteResult>{
+      return this.BrandRepository.delete({id: id});
    }
 }
