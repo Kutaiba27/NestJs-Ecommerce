@@ -1,21 +1,24 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from './database/database.module';
-import { CategoryModule } from './category/category.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { BrandModule } from './brand/brand.module';
+import { CategoryModule } from './modules/category/category.module';
+import { ConfigService } from '@nestjs/config';
+import { BrandModule } from './modules/brand/brand.module';
+import { ProductModule } from './modules/product/product.module';
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AppEnvConfig } from './package/config/env.config.module';
+import { DatabaseConnection } from './package/database/postgresConnection.module';
 
 @Module({
   imports: [
-    DatabaseModule,
+    DatabaseConnection,
     CategoryModule,
-    ConfigModule.forRoot({
-      envFilePath: 'dev.config.env',
-      isGlobal: true,
-    }),
+    AppEnvConfig,
     BrandModule,
+    ProductModule,
+    UserModule,
+    AuthModule
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {
   constructor(config: ConfigService) {
