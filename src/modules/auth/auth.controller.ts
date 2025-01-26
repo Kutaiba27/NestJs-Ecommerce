@@ -2,7 +2,6 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/modules/user/dto/createUser.dto';
-import { CheckEmailPipe } from 'src/modules/common/pipes/check-email/check-email.pipe';
 import { LogInDto } from './dto/logIn.dto';
 import { EnvironmentService } from '../../package/config/environments/environment.service';
 
