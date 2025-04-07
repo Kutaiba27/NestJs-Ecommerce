@@ -16,7 +16,7 @@ export interface IPordEnv extends IBaseEnv {
   database: IDatabasePordEnv;
 }
 
-export const GetProdEnv = ():IPordEnv=>({
+export const GetProdEnv = ():IPordEnv=><IPordEnv>({
   app: {
     host: process.env.HOST,
     name: process.env.NAME,

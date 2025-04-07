@@ -1,14 +1,15 @@
 import { Logger, Module, OnModuleInit } from '@nestjs/common';
-import { PrismaConnection } from './prisma.connection';
+import { PrismaService } from './prisma.service';
 
 
 @Module({
-  providers: [PrismaConnection]
+  providers: [PrismaService],
+  exports: [PrismaService]
 })
 export class PrismaModule implements OnModuleInit {
   onModuleInit(): any {
     const logger = new Logger('PrismaModule');
-    logger.log('database connection started');
+    logger.verbose('database initialize');
   }
 
 }

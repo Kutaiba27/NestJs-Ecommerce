@@ -1,19 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { AppEnvConfig, EnvConfigModule } from './package/config/environments/env.config.module';
-import { LoggerModule } from 'nestjs-pino';
-import { PrismaModule } from './package/database/postgresql/prisma.module';
+import { UserModule } from '/user/user.module';
+import { EnvConfigModule } from '@Package/config';
+import { PrismaModule } from '@Package/database/postgresql/prisma.module';
+import { AuthModule } from '/auth/auth.module';
 
 @Module({
   imports: [
-    LoggerModule.forRoot({
-      pinoHttp: {
-        level: 'info',
-    transport: { target: 'pino' }
-      }
-    }),
     PrismaModule,
     EnvConfigModule,
     // CategoryModule,
@@ -21,8 +14,14 @@ import { PrismaModule } from './package/database/postgresql/prisma.module';
     // BrandModule,
     // ProductModule,
     UserModule,
-    // AuthModule
+    AuthModule
   ],
+  providers: [
+    {
+      name: ,
+
+    }
+  ]
 })
 export class AppModule {
 }

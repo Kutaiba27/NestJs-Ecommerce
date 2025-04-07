@@ -1,35 +1,28 @@
-/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from 'src/modules/database/entities/user.entity';
-import { CreateUserDto } from '../dto/createUser.dto';
-import { UserRepository } from '../../database/repository/user.repository';
+import { IUser, UserEntity } from '/user';
+import { UserRepository } from '/database/repository/user.repository';
+import { IPagination } from '@Package/api';
+import { FindAllOutPut } from '@Package/database/postgresql/interface';
 
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
-  async findById(id: string){
-    return this.userRepository.findById(id);
+
+  async findById(id: string) {
+    return this.userRepository.findOne(id);
   }
 
-  async createUser(userInfo: CreateUserDto) {
-    return await this.userRepository.create(userInfo);
+  async findUserByEmail(email: string, throwError = true): Promise<UserEntity> {
+    return await this.userRepository.findUserByEmail(email, throwError);
   }
 
-  async getAllTask() {
-    return await this.userRepository.findAll();
+  async createUser(userInfo: IUser): Promise<UserEntity> {
+    return await this.userRepository.createUser(userInfo);
   }
 
-  async getUser(filterInput: Partial<UserEntity>) {
-    const filter = {
-      where: filterInput,
-      select: {
-        name: true
-      },
-      order: {
-      email: 'desc',
-    }
-    }
-    return await this.userRepository.findOne(filter);
-
+  async getAllUsers(
+    pagination?: IPagination,
+  ): Promise<FindAllOutPut<UserEntity>> {
+    return this.userRepository.findAllUsers(pagination);
   }
 }

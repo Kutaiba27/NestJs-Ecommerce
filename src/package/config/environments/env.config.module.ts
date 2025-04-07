@@ -22,5 +22,4 @@ export class EnvConfigModule implements OnModuleInit {
    onModuleInit(): any {
       this.logger.verbose("Environments initialized");
    }
-
 }
