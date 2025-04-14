@@ -1,1 +1,1 @@
-export *  from "./type/code.error"
+export * from "./error/code.error"

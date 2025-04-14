@@ -6,10 +6,4 @@ import { PrismaService } from './prisma.service';
   providers: [PrismaService],
   exports: [PrismaService]
 })
-export class PrismaModule implements OnModuleInit {
-  onModuleInit(): any {
-    const logger = new Logger('PrismaModule');
-    logger.verbose('database initialize');
-  }
-
-}
+export class PrismaModule {}

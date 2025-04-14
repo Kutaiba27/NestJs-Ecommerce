@@ -6,6 +6,7 @@ import { HashService, UserPayload } from '@Package/auth';
 import { UserService, UserEntity } from '/user';
 import { SingInDto } from '../api/dto/request/singIn.dto';
 import { LogInDto } from '../api/dto/request/logIn.dto';
+import { AuthError } from '/auth/services/auth.error';
 
 @Injectable()
 export class AuthService {
@@ -13,12 +14,13 @@ export class AuthService {
       private readonly jwtService: JwtService,
       private readonly userService: UserService,
       private readonly evn: EnvironmentService,
+      private readonly authError: AuthError,
    ){}
 
    public async singIn( userSingInInfo: SingInDto ){
       const isExist = await this.userService.findUserByEmail(userSingInInfo.email, false);
       if(isExist){
-         throw new HttpException('User already exist', HttpStatus.NOT_FOUND);
+         this.authError.userAlreadyExist();
       }
       userSingInInfo.password = await HashService.hashPassword(userSingInInfo.password);
       const user:UserEntity = await this.userService.createUser(userSingInInfo)

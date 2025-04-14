@@ -3,11 +3,11 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { EnvironmentService } from '@Package/config';
 import * as morgan from 'morgan';
-import { GlobalFilter } from '@Package/error/global.filter';
+import { ExceptionFilters } from '@Package/error';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useGlobalFilters(new GlobalFilter());
+  app.useGlobalFilters(...ExceptionFilters);
   const configService =  app.get(EnvironmentService);
   app.use(morgan("dev"))
   const port = configService.get("app.port");
@@ -15,5 +15,5 @@ async function bootstrap() {
     console.log(`Server running on port: ${port}`);
   });
 }
-bootstrap()
+void bootstrap()
   

@@ -9,19 +9,9 @@ import { AuthModule } from '/auth/auth.module';
   imports: [
     PrismaModule,
     EnvConfigModule,
-    // CategoryModule,
-    // AppEnvConfig,
-    // BrandModule,
-    // ProductModule,
     UserModule,
     AuthModule
   ],
-  providers: [
-    {
-      name: ,
-
-    }
-  ]
 })
 export class AppModule {
 }

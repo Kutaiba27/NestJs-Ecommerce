@@ -1,10 +1,10 @@
 
 export interface IError {
-  message: string;
+  message: string | object;
   code: number;
 }
 
 export interface IResponseError extends IError {
   path: string;
-  data: Date;
+  time: Date;
 }

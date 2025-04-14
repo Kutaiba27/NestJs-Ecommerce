@@ -4,7 +4,7 @@ import { AuthController, IPagination, Pagination } from '@Package/api';
 import { CreateUserDto } from '../dto/request/create-user.dto';
 
 @AuthController({
-   prefix: 'user',
+   prefix: 'users',
 })
 export class UserController {
    constructor(
